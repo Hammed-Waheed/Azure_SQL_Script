@@ -1,0 +1,12 @@
+SELECT 
+    dp1.name AS DatabaseUserName, 
+    dp2.name AS DatabaseRoleName,
+    dp2.type_desc AS DatabaseRoleType,
+    perm.permission_name AS DatabasePermissionName,
+    perm.state_desc AS DatabasePermissionState
+FROM sys.database_permissions AS perm
+JOIN sys.database_principals AS dp1 
+    ON perm.grantee_principal_id = dp1.principal_id
+JOIN sys.database_principals AS dp2 
+    ON perm.grantor_principal_id = dp2.principal_id
+ORDER BY dp1.name;
